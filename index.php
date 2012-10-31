@@ -30,6 +30,11 @@ $remotePath = "/";
 $sanatization = "M       trunk/web/";
 $sanatization2 = "A       trunk/web/";
 
+// misc internal vars
+$linesSubmited = 0;
+$files2Upload = 0;
+$filesUploaded = 0;
+
 if (isset($_POST["action"]) && $_POST["action"] == "process" )
 {
     // First i'll process the list:
@@ -48,6 +53,9 @@ if (isset($_POST["action"]) && $_POST["action"] == "process" )
             // line sanatized:
             $line = str_replace ( $sanatization , "" , $line );
             $line = str_replace ( $sanatization2 , "" , $line );
+            
+            // log
+            $linesSubmited++;
 
             // now check if the file exists in local:
             if (file_exists( $localPath . $line ) ) $sanaticedLines[] = $line;
@@ -69,10 +77,15 @@ if (isset($_POST["action"]) && $_POST["action"] == "process" )
         {
             $fileToUploadLocalPath = $localPath . $fileToUpload;
             $fileToUploadRemotePath = $remotePath . $fileToUpload;
+            
+            // log
+            $files2Upload++;
 
             // upload the file
             $upload = ftp_put($conn_id, $fileToUploadRemotePath, $fileToUploadLocalPath, FTP_ASCII);
             if (!$upload ) $failedUploadFiles[] = $fileToUpload;
+            else $filesUploaded++; // for the log:
+                
 
         }
 
@@ -83,7 +96,7 @@ if (isset($_POST["action"]) && $_POST["action"] == "process" )
         //  done :D !
         if (empty($failedUploadFiles) )
         {
-            $msg = 'EVERYTHING WAS UPLOADED SUCCESFULLY!!! :D';
+            $msg = "<b>$linesSubmited</b> lines submited, <b>$files2Upload</b> files to upload and <b>$filesUploaded</b> files uploaded.";
         }
         else
         {
