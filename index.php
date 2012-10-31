@@ -5,7 +5,7 @@ set_time_limit(0);
 #################################
 #################################
 #################################
-# FTP uploader
+# FTP Upload changes from git-diff
 # by Marco
 # 2012
 # ^_^
@@ -26,6 +26,10 @@ $server = array ( "quality" =>
 $localPath = "/opt/lampp/htdocs/myproject";
 $remotePath = "/";
 
+// This variables are for clean the path url:
+$sanatization = "M       trunk/web/";
+$sanatization2 = "A       trunk/web/";
+
 if (isset($_POST["action"]) && $_POST["action"] == "process" )
 {
     // First i'll process the list:
@@ -42,8 +46,8 @@ if (isset($_POST["action"]) && $_POST["action"] == "process" )
             if (!$line ) continue;
 
             // line sanatized:
-            $sanatization = "M       trunk/web/";
             $line = str_replace ( $sanatization , "" , $line );
+            $line = str_replace ( $sanatization2 , "" , $line );
 
             // now check if the file exists in local:
             if (file_exists( $localPath . $line ) ) $sanaticedLines[] = $line;
