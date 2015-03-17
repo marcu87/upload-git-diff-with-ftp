@@ -18,7 +18,7 @@ That's all, all the files listed will be uploaded to the server that you choosed
 # Configuration
 Open the *index.php* and change the server for your server configuration.
 Change the variable `$localPath` and `$remotePath`
-Modify the $sanatization variables also, that is the the replazment of the url's to clean the path of your files.
+Modify the `$sanatization` variables also, that is the the replazment of the url's to clean the path of your files.
 
 # Download
 [Click here to download](https://github.com/marcu87/upload-git-diff-with-ftp/archive/master.zip)
