@@ -23,4 +23,7 @@ Modify the $sanatization variables also, that is the the replazment of the url's
 # Download
 [Click here to download](https://github.com/marcu87/upload-git-diff-with-ftp/archive/master.zip)
 
+ 
+ 
+ 
 _And that's all, you are ready to start uploading!_
